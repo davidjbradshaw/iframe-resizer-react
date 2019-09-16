@@ -1,12 +1,11 @@
+import ExampleComponent from 'iframe-resizer-react'
 import React, { Component } from 'react'
 
-import ExampleComponent from 'iframe-resizer-react'
-
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ExampleComponent text="Modern React component module" />
       </div>
     )
   }
