@@ -55,12 +55,10 @@ const IframeResizer = props => {
 }
 
 IframeResizer.defaultProps = {
-  id: undefined,
   title: 'iframe',
 }
 
 IframeResizer.propTypes = {
-  id: PropTypes.string,
   title: PropTypes.string,
 }
 
