@@ -7,12 +7,12 @@ export default class App extends Component {
       <div style={{ margin: '20px' }}>
         <h2>Automagically resizing React iFrame component</h2>
         <p>
-          Resize window or click one of the links in the iFrame to watch it
-          resize.
+          Resize window or click one of the links in the iFrame to watch it resize.
         </p>
         <div style={{ margin: '20px' }}>
           <IframeResizer
             log
+            inPageLinks
             src="http://davidjbradshaw.com/iframe-resizer/example/frame.content.html"
             width="100%"
             scrolling="no"

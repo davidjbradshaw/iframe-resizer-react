@@ -13,11 +13,10 @@ npm install --save iframe-resizer-react
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
-
+import React from 'react'
 import IframeResizer from 'iframe-resizer-react'
 
-const Example = () =>{}
+const Example = () => {
   <IframeResizer
     ref={ref}
     src="..."
@@ -32,7 +31,7 @@ const Example = () =>{}
 
 ## API Documentation
 
-All IFrame-Resizer parent page _options_ and _events_ can be directly passed as props to the `<IframeResizer/>` compontents. A subset of the methods are exported via `ref`.
+All IFrame-Resizer parent page _options_ and _events_ can be directly passed as props to the `<IframeResizer/>` compontent. A subset of the methods are exported via `ref`.
 
 - **Parent Page API**
   - [Options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md)
