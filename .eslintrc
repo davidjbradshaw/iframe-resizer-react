@@ -26,6 +26,11 @@
     }
   },
   "rules": {
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/control-has-associated-label": 0,
+    "react/prop-types": [2, { "ignore": ["forwordRef"] }],
+    "react/jsx-props-no-spreading": 0,
+    "react/forbid-prop-types": 0,
     "prettier/prettier": [
       "error",
       {
@@ -39,6 +44,7 @@
       {
         "usePrettierrc": true
       }
-    ]
+    ],
+    "unicorn/prevent-abbreviations": 0,
   }
 }
