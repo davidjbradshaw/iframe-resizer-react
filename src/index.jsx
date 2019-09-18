@@ -2,56 +2,43 @@ import iframeResize from 'iframe-resizer/js/iframeResizer'
 import PropTypes from 'prop-types'
 import React, { useEffect, useImperativeHandle, useRef } from 'react'
 
+import filterIframeAttribs from './filter-iframe-attribs'
+
+const onClose = () => false
+
 const IframeResizer = props => {
-  const { title, forwordRef, ...rest } = props
-  const {
-    autoResize,
-    bodyBackground,
-    bodyMargin,
-    bodyPadding,
-    checkOrigin,
-    inPageLinks,
-    heightCalculationMethod,
-    interval,
-    log,
-    maxHeight,
-    maxWidth,
-    minHeight,
-    minWidth,
-    resizeFrom,
-    scrolling,
-    sizeHeight,
-    sizeWidth,
-    warningTimeout,
-    tolerance,
-    widthCalculationMethod,
-    onClosed,
-    onInit,
-    onMessage,
-    onResized,
-    ...iframeProps
-  } = rest
-
+  const { title, forwardRef, ...rest } = props
+  const iframeProps = filterIframeAttribs(rest)
   const iframeRef = useRef(null)
-  let api
 
-  useEffect(() => () => api.removeListeners()) // eslint-disable-line unicorn/consistent-function-scoping
-
-  const onLoad = () => {
-    if (!api) {
-      ;[api] = iframeResize(props, iframeRef.current)
-    }
+  const onClosed = () => {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `[iframeSizerReact][${iframeRef.current.id}] Close event ignored, to remove the iframe, update your React component`
+    )
   }
 
-  useImperativeHandle(forwordRef, () => ({
-    resize: api && api.resize,
-    moveToAnchor: api && api.moveToAnchor,
-    sendMessage: api && api.sendMessage,
+  // This hook is only run once, as once iframeResizer is bound, it will
+  // deal with changes to the element and does not need recalling
+  useEffect(() => {
+    const iframe = iframeRef.current
+
+    if (!iframe.iframeResizer)
+      iframeResize({ ...rest, onClose, onClosed }, iframe)
+
+    return () => iframe.iframeResizer && iframe.iframeResizer.removeListeners()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useImperativeHandle(forwardRef, () => ({
+    resize: () => iframeRef.current.iFrameResizer.resize(),
+    moveToAnchor: anchor =>
+      iframeRef.current.iFrameResizer.moveToAnchor(anchor),
+    sendMessage: (message, targetOrigin) => {
+      iframeRef.current.iFrameResizer.sendMessage(message, targetOrigin)
+    },
   }))
 
-  return (
-    <iframe title={title} {...iframeProps} ref={iframeRef} onLoad={onLoad} />
-  )
+  return <iframe title={title} {...iframeProps} ref={iframeRef} />
 }
 
 IframeResizer.defaultProps = {
