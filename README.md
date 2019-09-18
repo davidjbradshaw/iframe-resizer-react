@@ -64,9 +64,10 @@ export default () => {
   return (
     <div>
       <IframeResizer
-        log
-        inPageLinks
         forwardRef={iframeRef}
+        heightCalculationMethod="lowestElement"
+        inPageLinks
+        log
         onMessage={onMessage}
         onResized={onResized}
         src="http://anotherdomain.com/iframe.html"
