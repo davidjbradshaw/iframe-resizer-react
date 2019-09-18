@@ -24,8 +24,7 @@ const IframeResizer = props => {
   useEffect(() => {
     const iframe = iframeRef.current
 
-    if (!iframe.iframeResizer)
-      iframeResize({ ...rest, onClose, onClosed }, iframe)
+    iframeResize({ ...rest, onClose, onClosed }, iframe)
 
     return () => iframe.iframeResizer && iframe.iframeResizer.removeListeners()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps

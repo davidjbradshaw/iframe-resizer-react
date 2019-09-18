@@ -8,8 +8,6 @@ node_modules
 build
 dist
 .rpt2_cache
-example/public/html
-example/public/js
 
 # misc
 .DS_Store
