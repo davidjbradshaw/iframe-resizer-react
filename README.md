@@ -81,12 +81,13 @@ export default () => {
 
 ## API Documentation
 
-The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API is supported by the `<IframeResizer/>` compontent, except for the methods and events used to remove an iframe from the page, instead you should just remove the componet via JSX and it will internally call these methods for you to remove attached handlers. The parent page methods are exported via `forwardRef`.
+The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API is supported by the `<IframeResizer/>` compontent, except for the methods and events used to remove an iframe from the page, instead you should just remove the componet via JSX and it will internally call these methods for you to remove attached handlers.
 
 - **Parent Page API**
   - [Options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md)
   - [Events](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/events.md) _(**Except** onClose and onClosed)_
-  - [Methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/methods.md) - _(**Except** close() and removeListeners())_
+  - [Methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/methods.md) _(**Except** close() and removeListeners())_
+  _These methods are exported directly via `forwardRef`, rather than being attached to the iframe_
 - **IFramed Page API**
   - [Options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/options.md)
   - [Events](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/events.md)
