@@ -25,8 +25,7 @@
   "peerDependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "uuid": "^3.3.3"
+    "react-dom": "^16.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -86,6 +85,7 @@
     "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3",
