@@ -24,7 +24,7 @@ const Example = () => {
   />
 ```
 
-The page in the iframe then needs file ([iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js)) from [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer). _This file is designed to be a guest on someone else's system, so has no dependencies and won't do anything until it's activated by a message from the containing page_.
+The page in the iframe then needs ([iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js)) from [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer). _This file is designed to be a guest on someone else's system, so has no dependencies and won't do anything until it's activated by a message from the containing page_.
 
 ### Typical setup
 
@@ -91,6 +91,10 @@ The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API 
   - [Events](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/events.md)
   - [Methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/methods.md)
 - [Troubleshooting](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/troubleshooting.md)
+
+### Alternatives
+
+This project uses React Hooks internally, so requires React 18.8 or later. If you are using an older version of React or require support for IE8-10 then you should checkout [react-iframe-resizer-super](https://github.com/zeroasterisk/react-iframe-resizer-super#readme), which is based on iframe-resizer version 3.
 
 ## License
 
