@@ -92,7 +92,7 @@ export default () => {
 
 ## API Documentation
 
-The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API is supported by the `<IframeResizer/>` compontent, except for the methods and events used to remove an iframe from the page, instead you should just remove the componet via JSX and it will internally call these methods for you to remove attached handlers.
+The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API is supported by the `<IframeResizer/>` compontent, except for the methods and events used to remove an iframe from the page. Instead you should just remove the componet via JSX and it will internally call these methods for you to remove attached handlers.
 
 - **Parent Page API**
   - [Options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md)
