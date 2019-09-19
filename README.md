@@ -28,15 +28,11 @@ npm install --save iframe-resizer-react
 The `<IframeResizer />` component can be passed all`<iframe>` atrributes, along with _[options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md)_ and _[events](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/events.md)_ from [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer). You can also optionally pass a `forwardRef` to gain access to a few _[methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/methods.md)_ that provide a simple interface to communicate with the page in the iframe.
 
 ```jsx
-import React from 'react'
-import IframeResizer from 'iframe-resizer-react'
-
-const Example = () => {
-  <IframeResizer
-    {iframe attributes}
-    {iframe-resizer options}
-    {iframe-resizer events}
-  />
+<IframeResizer
+  {iframe attributes}
+  {iframe-resizer options}
+  {iframe-resizer events}
+/>
 ```
 
 The page in the iframe then needs ([iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js)) from [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer). _This file is designed to be a guest on someone else's system, so has no dependencies and won't do anything until it's activated by a message from the containing page_.
