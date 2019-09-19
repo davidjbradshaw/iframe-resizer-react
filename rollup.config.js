@@ -42,8 +42,7 @@ export default {
           dest: 'example/public/html',
         },
         {
-          src:
-            'node_modules/iframe-resizer/js/iframeResizer.contentWindow.min.js',
+          src: 'node_modules/iframe-resizer/js/iframeResizer.contentWindow.*',
           dest: 'example/public/js',
         },
       ],
