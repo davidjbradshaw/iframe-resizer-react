@@ -2,7 +2,20 @@
 
 [![NPM](https://img.shields.io/npm/v/iframe-resizer-react.svg)](https://www.npmjs.com/package/iframe-resizer-react)
 
-This library is the offical React interface for [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer).
+This library is the offical React interface for [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer), which enables the automatic resizing of the height and width of both same and cross domain iFrames to fit their contained content. It provides a range of features to address the most common issues with using iFrames, these include:
+
+- Height and width resizing of the iFrame to content size.
+- Works with multiple and nested iFrames.
+- Domain authentication for cross domain iFrames.
+- Provides a range of page size calculation methods to support complex CSS layouts.
+- Detects changes to the DOM that can cause the page to resize using [MutationObserver](https://developer.mozilla.org/en/docs/Web/API/MutationObserver).
+- Detects events that can cause the page to resize (Window Resize, CSS Animation and Transition, Orientation Change and Mouse events).
+- Simplified messaging between iFrame and host page via [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage).
+- Fixes in page links in iFrame and supports links between the iFrame and parent page.
+- Provides custom sizing and scrolling methods.
+- Exposes parent position and viewport size to the iFrame.
+- Works with [ViewerJS](http://viewerjs.org/) to support PDF and ODF documents.
+- Supports IE 11
 
 ## Install
 
@@ -11,6 +24,8 @@ npm install --save iframe-resizer-react
 ```
 
 ## Usage
+
+The `<IframeResizer />` component can be passed all`<iframe>` atrributes, along with _[options](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md)_ and _[events](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/events.md)_ from [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer). You can also optionally pass a `forwardRef` to gain access to a few _[methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/methods.md)_ that provide a simple interface to communicate with the page in the iframe.
 
 ```jsx
 import React from 'react'
@@ -28,7 +43,7 @@ The page in the iframe then needs ([iframeResizer.contentWindow.min.js](https://
 
 ### Typical setup
 
-The normal configuration is to have the iFrame resize when the browser window changes size or the content of the iFrame changes. To set this up you need to configure one of the dimensions of the iFrame to a percentage and tell the library to only update the other dimension. Normally you would set the width to 100% and have the height scale to fit the content.
+The normal configuration is to have the iframe resize when the browser window changes size or the content of the iFrame changes. To set this up you need to configure one of the dimensions of the iFrame to a percentage and tell the library to only update the other dimension. Normally you would set the width to 100% and have the height scale to fit the content.
 
 ```jsx
 <IframeResizer
