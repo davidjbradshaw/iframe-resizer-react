@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/iframe-resizer-react.svg)](https://www.npmjs.com/package/iframe-resizer-react)
 
-This library is the offical React interface for [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer), which enables the automatic resizing of the height and width of both same and cross domain iFrames to fit their contained content. It provides a range of features to address the most common issues with using iFrames, these include:
+This library is the official React interface for [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer), which enables the automatic resizing of the height and width of both same and cross domain iFrames to fit their contained content. It provides a range of features to address the most common issues with using iFrames, these include:
 
 - Height and width resizing of the iFrame to content size.
 - Works with multiple and nested iFrames.
