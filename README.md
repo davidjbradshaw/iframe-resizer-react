@@ -105,6 +105,12 @@ The full [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API 
   - [Methods](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/methods.md)
 - [Troubleshooting](https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/troubleshooting.md)
 
+## Donate
+
+Iframe-resizer is the result of many 100s of hours of work, if you would like to join others in showing support for the development of this project, then please feel free to buy me a coffee.
+
+<a href="https://www.buymeacoffee.com/davidjbradshaw " target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 ## Alternatives
 
 This project uses React Hooks internally, so requires React 16.8 or later. If you are using an older version of React or require support for IE8-10 then you should checkout [react-iframe-resizer-super](https://github.com/zeroasterisk/react-iframe-resizer-super#readme), which is based on iframe-resizer v3.
