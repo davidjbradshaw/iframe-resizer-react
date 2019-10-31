@@ -12,10 +12,10 @@ const IframeResizer = props => {
 
   const onClose = () => {
     warning(
-      false,
+      !iframeRef.current,
       `[iframeSizerReact][${iframeRef.current.id}] Close event ignored, to remove the iframe update your React component`
     )
-    return false
+    return !iframeRef.current
   }
 
   // This hook is only run once, as once iframeResizer is bound, it will
