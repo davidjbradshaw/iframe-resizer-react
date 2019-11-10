@@ -62,14 +62,14 @@ The normal configuration is to have the iframe resize when the browser window ch
 This is a more advanced configuration, taken from the [example](https://github.com/davidjbradshaw/iframe-resizer-react/tree/master/example) folder, which demostrates the use of _options_, _events_ and _methods_ from the [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) API. See below for more details.
 
 ```jsx
-import IframeResizer from 'iframe-resizer-react'
 import React, { useRef, useState } from 'react'
+import IframeResizer from 'iframe-resizer-react'
 
 import MessageData from './message-data'
 
 export default () => {
   const iframeRef = useRef(null)
-  const [messageData, setMessageData] = useState(undefined)
+  const [messageData, setMessageData] = useState()
 
   const onResized = data => setMessageData(data)
 
@@ -79,7 +79,7 @@ export default () => {
   }
 
   return (
-    <div>
+    <>
       <IframeResizer
         forwardRef={iframeRef}
         heightCalculationMethod="lowestElement"
@@ -91,7 +91,7 @@ export default () => {
         style={{ width: '1px', minWidth: '100%'}}
       />
       <MessageData data={messageData} />
-    </div>
+    </>
   )
 }
 ```
