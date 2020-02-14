@@ -13,7 +13,10 @@ const IframeResizer = props => {
   const onClose = () => {
     warning(
       !iframeRef.current,
-      `[iframeSizerReact][${iframeRef.current.id}] Close event ignored, to remove the iframe update your React component`
+      `[iframeSizerReact][${iframeRef &&
+        iframeRef.current &&
+        iframeRef.current
+          .id}] Close event ignored, to remove the iframe update your React component`
     )
     return !iframeRef.current
   }
