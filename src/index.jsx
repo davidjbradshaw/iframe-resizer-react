@@ -48,6 +48,8 @@ IframeResizer.defaultProps = {
 }
 
 IframeResizer.propTypes = {
+  src: PropTypes.string.isRequired,
+  style: PropTypes.object,
   title: PropTypes.string,
 }
 
