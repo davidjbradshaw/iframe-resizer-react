@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const MessageData = props => {
+const MessageData = (props) => {
   const { data } = props
 
   return data ? (

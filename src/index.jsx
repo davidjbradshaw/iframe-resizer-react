@@ -5,7 +5,7 @@ import warning from 'warning'
 
 import filterIframeAttribs from './filter-iframe-attribs'
 
-const IframeResizer = props => {
+const IframeResizer = (props) => {
   const { title, forwardRef, ...rest } = props
   const iframeProps = filterIframeAttribs(rest)
   const iframeRef = useRef(null)
@@ -13,10 +13,9 @@ const IframeResizer = props => {
   const onClose = () => {
     warning(
       !iframeRef.current,
-      `[iframeSizerReact][${iframeRef &&
-        iframeRef.current &&
-        iframeRef.current
-          .id}] Close event ignored, to remove the iframe update your React component`
+      `[iframeSizerReact][${
+        iframeRef && iframeRef.current && iframeRef.current.id
+      }] Close event ignored, to remove the iframe update your React component`
     )
     return !iframeRef.current
   }
@@ -33,7 +32,7 @@ const IframeResizer = props => {
 
   useImperativeHandle(forwardRef, () => ({
     resize: () => iframeRef.current.iFrameResizer.resize(),
-    moveToAnchor: anchor =>
+    moveToAnchor: (anchor) =>
       iframeRef.current.iFrameResizer.moveToAnchor(anchor),
     sendMessage: (message, targetOrigin) => {
       iframeRef.current.iFrameResizer.sendMessage(message, targetOrigin)

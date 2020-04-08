@@ -7,9 +7,9 @@ export default () => {
   const ref = useRef(null)
   const [messageData, setMessageData] = useState(undefined)
 
-  const onResized = data => setMessageData(data)
+  const onResized = (data) => setMessageData(data)
 
-  const onMessage = data => {
+  const onMessage = (data) => {
     setMessageData(data)
     ref.current.sendMessage('Hello back from parent page')
   }
