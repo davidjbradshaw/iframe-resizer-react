@@ -94,6 +94,11 @@
 
     if (!requestAnimationFrame) {
       log('setup', 'RequestAnimationFrame not supported')
+    } else {
+      // Firefox extension content-scripts have a globalThis object that is not the same as window.
+      // Binding `requestAnimationFrame` to window allows the function to work and prevents errors
+      // being thrown when run in that context, and should be a no-op in every other context.
+      requestAnimationFrame = requestAnimationFrame.bind(window);
     }
   }
 
@@ -175,7 +180,7 @@
       var bot = compStyle.paddingBottom ? parseInt(compStyle.paddingBottom, 10) : 0
       return top + bot
     }
-    
+
     function getBorderEnds(compStyle) {
       if (compStyle.boxSizing !== 'border-box') {
         return 0;
@@ -576,7 +581,7 @@
         trigger(
           'iFrame requested init',
           createOutgoingMsg(iframeId),
-          document.getElementById(iframeId),
+          settings[iframeId].iframe,
           iframeId
         )
       }
@@ -1092,7 +1097,7 @@
     }
 
     function getTargetOrigin(remoteHost) {
-      return '' === remoteHost || 'file://' === remoteHost ? '*' : remoteHost
+      return '' === remoteHost || null !== remoteHost.match(/^(about:blank|javascript:|file:\/\/)/) ? '*' : remoteHost
     }
 
     function depricate(key) {
@@ -1275,7 +1280,7 @@
 
     Object.keys(settings).forEach(function(iframeId) {
       if (isIFrameResizeEnabled(iframeId)) {
-        trigger(eventName, event, document.getElementById(iframeId), iframeId)
+        trigger(eventName, event, settings[iframeId].iframe, iframeId)
       }
     })
   }
