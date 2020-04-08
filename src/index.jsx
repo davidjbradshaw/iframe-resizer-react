@@ -13,7 +13,10 @@ const IframeResizer = props => {
   const onClose = () => {
     warning(
       !iframeRef.current,
-      `[iframeSizerReact][${iframeRef.current.id}] Close event ignored, to remove the iframe update your React component`
+      `[iframeSizerReact][${iframeRef &&
+        iframeRef.current &&
+        iframeRef.current
+          .id}] Close event ignored, to remove the iframe update your React component`
     )
     return !iframeRef.current
   }
@@ -25,7 +28,7 @@ const IframeResizer = props => {
 
     iframeResize({ ...rest, onClose }, iframe)
 
-    return () => iframe.iframeResizer && iframe.iframeResizer.removeListeners()
+    return () => iframe.iFrameResizer && iframe.iFrameResizer.removeListeners()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useImperativeHandle(forwardRef, () => ({
