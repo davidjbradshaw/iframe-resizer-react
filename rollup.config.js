@@ -45,6 +45,10 @@ export default {
           src: 'node_modules/iframe-resizer/js/iframeResizer.*',
           dest: 'example/public/js',
         },
+        {
+          src: 'src/index.d.ts',
+          dest: 'dist',
+        },
       ],
     }),
   ],

@@ -7,6 +7,7 @@
   "repository": "davidjbradshaw/iframe-resizer-react",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
