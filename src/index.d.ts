@@ -25,6 +25,7 @@ declare module "iframe-resizer-react" {
       bodyMargin?: string | number | null;
       bodyPadding?: string | number | null;
       checkOrigin?: boolean | string[];
+      forwardRef?: any;
       inPageLinks?: boolean;
       enablePublicMethods?: boolean;
       heightCalculationMethod?:
