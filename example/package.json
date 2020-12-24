@@ -8,7 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "^4.0.0",
     "iframe-resizer-react": "file:.."
   },
   "scripts": {
