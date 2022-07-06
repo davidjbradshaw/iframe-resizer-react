@@ -13,6 +13,10 @@ declare module "iframe-resizer-react" {
       iFrameResizer: IFrameObject;
     }
 
+    type IFrameForwardRef = Omit<IFrameObject, 'close' | 'removeListeners'> & {
+      getIframeElement: () => IFrameComponent;
+    }
+
     type IframeProps = React.DetailedHTMLProps<
       React.IframeHTMLAttributes<HTMLIFrameElement>,
       HTMLIFrameElement
