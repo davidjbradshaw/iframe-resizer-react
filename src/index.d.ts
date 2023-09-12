@@ -47,6 +47,7 @@ declare module "iframe-resizer-react" {
       sizeHeight?: boolean;
       sizeWidth?: boolean;
       tolerance?: number;
+      warningTimeout?: number;
       widthCalculationMethod?:
         | "bodyOffset"
         | "bodyScroll"
