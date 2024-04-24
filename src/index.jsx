@@ -6,18 +6,18 @@ import warning from 'warning'
 import filterIframeAttribs from './filter-iframe-attribs'
 
 const IframeResizer = (props) => {
-  const { title, forwardRef, ...rest } = props
+  const { title = 'iframe', forwardRef, ...rest } = props
   const iframeProps = filterIframeAttribs(rest)
   const iframeRef = useRef(null)
 
   const onClose = () => {
     warning(
-      !iframeRef.current,
+      !iframeRef?.current,
       `[iframeSizerReact][${
-        iframeRef && iframeRef.current && iframeRef.current.id
+        iframeRef?.current?.id
       }] Close event ignored, to remove the iframe update your React component`
     )
-    return !iframeRef.current
+    return !iframeRef?.current
   }
 
   // This hook is only run once, as once iframeResizer is bound, it will
@@ -27,7 +27,7 @@ const IframeResizer = (props) => {
 
     iframeResize({ ...rest, onClose }, iframe)
 
-    return () => iframe.iFrameResizer && iframe.iFrameResizer.removeListeners()
+    return () => iframe?.iFrameResizer?.removeListeners()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useImperativeHandle(forwardRef, () => ({
@@ -41,10 +41,6 @@ const IframeResizer = (props) => {
   }))
 
   return <iframe title={title} {...iframeProps} ref={iframeRef} />
-}
-
-IframeResizer.defaultProps = {
-  title: 'iframe',
 }
 
 IframeResizer.propTypes = {
