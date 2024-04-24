@@ -9,7 +9,7 @@
  */
 
 // eslint-disable-next-line sonarjs/cognitive-complexity, no-shadow-restricted-names
-;(function(undefined) {
+;(function (undefined) {
   if (typeof window === 'undefined') return // don't run for server side render
 
   var autoResize = true,
@@ -32,6 +32,7 @@
     interval = 32,
     intervalTimer = null,
     logging = false,
+    mouseEvents = false,
     msgID = '[iFrameSizer]', // Must match host page msg ID
     msgIdLen = msgID.length,
     myID = '',
@@ -53,17 +54,17 @@
     widthCalcModeDefault = 'scroll',
     widthCalcMode = widthCalcModeDefault,
     win = window,
-    onMessage = function() {
+    onMessage = function () {
       warn('onMessage function not defined')
     },
-    onReady = function() {},
-    onPageInfo = function() {},
+    onReady = function () {},
+    onPageInfo = function () {},
     customCalcMethods = {
-      height: function() {
+      height: function () {
         warn('Custom height calculation function not defined')
         return document.documentElement.offsetHeight
       },
-      width: function() {
+      width: function () {
         warn('Custom width calculation function not defined')
         return document.body.scrollWidth
       }
@@ -78,7 +79,8 @@
       {},
       {
         passive: {
-          get: function() {
+          // eslint-disable-next-line getter-return
+          get: function () {
             passiveSupported = true
           }
         }
@@ -109,8 +111,8 @@
       result,
       timeout = null,
       previous = 0,
-      later = function() {
-        previous = getNow()
+      later = function () {
+        previous = Date.now()
         timeout = null
         result = func.apply(context, args)
         if (!timeout) {
@@ -119,8 +121,8 @@
         }
       }
 
-    return function() {
-      var now = getNow()
+    return function () {
+      var now = Date.now()
 
       if (!previous) {
         previous = now
@@ -152,13 +154,6 @@
     }
   }
 
-  var getNow =
-    Date.now ||
-    function() {
-      /* istanbul ignore next */ // Not testable in PhantonJS
-      return new Date().getTime()
-    }
-
   function formatLogMsg(msg) {
     return msgID + '[' + myID + '] ' + msg
   }
@@ -179,7 +174,7 @@
 
   function init() {
     readDataFromParent()
-    log('Initialising iFrame (' + location.href + ')')
+    log('Initialising iFrame (' + window.location.href + ')')
     readDataFromPage()
     setMargin()
     setBodyStyle('background', bodyBackground)
@@ -189,6 +184,7 @@
     checkWidthMode()
     stopInfiniteResizingOfIFrame()
     setupPublicMethods()
+    setupMouseEvents()
     startEventListeners()
     inPageLinks = setupInPageLinks()
     sendSize('init', 'Init message from host page')
@@ -200,22 +196,23 @@
       return 'true' === str
     }
 
-    var data = initMsg.substr(msgIdLen).split(':')
+    var data = initMsg.slice(msgIdLen).split(':')
 
     myID = data[0]
-    bodyMargin = undefined !== data[1] ? Number(data[1]) : bodyMargin // For V1 compatibility
-    calculateWidth = undefined !== data[2] ? strBool(data[2]) : calculateWidth
-    logging = undefined !== data[3] ? strBool(data[3]) : logging
-    interval = undefined !== data[4] ? Number(data[4]) : interval
-    autoResize = undefined !== data[6] ? strBool(data[6]) : autoResize
+    bodyMargin = undefined === data[1] ? bodyMargin : Number(data[1]) // For V1 compatibility
+    calculateWidth = undefined === data[2] ? calculateWidth : strBool(data[2])
+    logging = undefined === data[3] ? logging : strBool(data[3])
+    interval = undefined === data[4] ? interval : Number(data[4])
+    autoResize = undefined === data[6] ? autoResize : strBool(data[6])
     bodyMarginStr = data[7]
-    heightCalcMode = undefined !== data[8] ? data[8] : heightCalcMode
+    heightCalcMode = undefined === data[8] ? heightCalcMode : data[8]
     bodyBackground = data[9]
     bodyPadding = data[10]
-    tolerance = undefined !== data[11] ? Number(data[11]) : tolerance
-    inPageLinks.enable = undefined !== data[12] ? strBool(data[12]) : false
-    resizeFrom = undefined !== data[13] ? data[13] : resizeFrom
-    widthCalcMode = undefined !== data[14] ? data[14] : widthCalcMode
+    tolerance = undefined === data[11] ? tolerance : Number(data[11])
+    inPageLinks.enable = undefined === data[12] ? false : strBool(data[12])
+    resizeFrom = undefined === data[13] ? resizeFrom : data[13]
+    widthCalcMode = undefined === data[14] ? widthCalcMode : data[14]
+    mouseEvents = undefined === data[15] ? mouseEvents : strBool(data[15])
   }
 
   function depricate(key) {
@@ -311,7 +308,7 @@
 
   function manageTriggerEvent(options) {
     var listener = {
-      add: function(eventName) {
+      add: function (eventName) {
         function handleEvent() {
           sendSize(options.eventName, options.eventType)
         }
@@ -320,7 +317,7 @@
 
         addEventListener(window, eventName, handleEvent, { passive: true })
       },
-      remove: function(eventName) {
+      remove: function (eventName) {
         var handleEvent = eventHandlersByName[eventName]
         delete eventHandlersByName[eventName]
 
@@ -381,7 +378,7 @@
     manageTriggerEvent({
       method: method,
       eventType: 'Print',
-      eventName: ['afterprint', 'beforeprint']
+      eventNames: ['afterprint', 'beforeprint']
     })
     manageTriggerEvent({
       method: method,
@@ -528,13 +525,13 @@
     function getPagePosition() {
       return {
         x:
-          window.pageXOffset !== undefined
-            ? window.pageXOffset
-            : document.documentElement.scrollLeft,
+          window.pageXOffset === undefined
+            ? document.documentElement.scrollLeft
+            : window.pageXOffset,
         y:
-          window.pageYOffset !== undefined
-            ? window.pageYOffset
-            : document.documentElement.scrollTop
+          window.pageYOffset === undefined
+            ? document.documentElement.scrollTop
+            : window.pageYOffset
       }
     }
 
@@ -569,21 +566,24 @@
           document.getElementById(hashData) ||
           document.getElementsByName(hashData)[0]
 
-      if (undefined !== target) {
-        jumpToTarget(target)
-      } else {
+      if (undefined === target) {
         log(
           'In page link (#' +
             hash +
             ') not found in iFrame, so sending to parent'
         )
         sendMsg(0, 0, 'inPageLink', '#' + hash)
+      } else {
+        jumpToTarget(target)
       }
     }
 
     function checkLocationHash() {
-      if ('' !== location.hash && '#' !== location.hash) {
-        findTarget(location.href)
+      var hash = window.location.hash
+      var href = window.location.href
+
+      if ('' !== hash && '#' !== hash) {
+        findTarget(href)
       }
     }
 
@@ -641,6 +641,22 @@
     }
   }
 
+  function setupMouseEvents() {
+    if (mouseEvents !== true) return
+
+    function sendMouse(e) {
+      sendMsg(0, 0, e.type, e.screenY + ':' + e.screenX)
+    }
+
+    function addMouseListener(evt, name) {
+      log('Add event listener: ' + name)
+      addEventListener(window.document, evt, sendMouse)
+    }
+
+    addMouseListener('mouseenter', 'Mouse Enter')
+    addMouseListener('mouseleave', 'Mouse Leave')
+  }
+
   function setupPublicMethods() {
     log('Enable public methods')
 
@@ -671,7 +687,7 @@
           onPageInfo = callback
           sendMsg(0, 0, 'pageInfo')
         } else {
-          onPageInfo = function() {}
+          onPageInfo = function () {}
           sendMsg(0, 0, 'pageInfoStop')
         }
       },
@@ -731,7 +747,7 @@
   function initInterval() {
     if (0 !== interval) {
       log('setInterval: ' + interval + 'ms')
-      intervalTimer = setInterval(function() {
+      intervalTimer = setInterval(function () {
         sendSize('interval', 'setInterval: ' + interval)
       }, Math.abs(interval))
     }
@@ -773,7 +789,7 @@
 
     function imageEventTriggered(event, type, typeDesc) {
       removeImageLoadListener(event.target)
-      sendSize(type, typeDesc + ': ' + event.target.src, undefined, undefined)
+      sendSize(type, typeDesc + ': ' + event.target.src)
     }
 
     function imageLoaded(event) {
@@ -819,7 +835,7 @@
       observer = createMutationObserver()
 
     return {
-      disconnect: function() {
+      disconnect: function () {
         if ('disconnect' in observer) {
           log('Disconnect body MutationObserver')
           observer.disconnect()
@@ -855,7 +871,7 @@
     el = el || document.body // Not testable in phantonJS
 
     retVal = document.defaultView.getComputedStyle(el, null)
-    retVal = null !== retVal ? retVal[prop] : 0
+    retVal = null === retVal ? 0 : retVal[prop]
 
     return parseInt(retVal, base)
   }
@@ -873,7 +889,7 @@
       elVal = 0,
       maxVal = 0,
       Side = capitalizeFirstLetter(side),
-      timer = getNow()
+      timer = Date.now()
 
     for (var i = 0; i < elementsLength; i++) {
       elVal =
@@ -884,7 +900,7 @@
       }
     }
 
-    timer = getNow() - timer
+    timer = Date.now() - timer
 
     log('Parsed ' + elementsLength + ' HTML elements')
     log('Element position calculated in ' + timer + 'ms')
@@ -894,12 +910,12 @@
     return maxVal
   }
 
-  function getAllMeasurements(dimention) {
+  function getAllMeasurements(dimensions) {
     return [
-      dimention.bodyOffset(),
-      dimention.bodyScroll(),
-      dimention.documentElementOffset(),
-      dimention.documentElementScroll()
+      dimensions.bodyOffset(),
+      dimensions.bodyScroll(),
+      dimensions.documentElementOffset(),
+      dimensions.documentElementScroll()
     ]
   }
 
@@ -911,7 +927,7 @@
 
     var elements = document.querySelectorAll('[' + tag + ']')
 
-    if (0 === elements.length) noTaggedElementsFound()
+    if (elements.length === 0) noTaggedElementsFound()
 
     return getMaxElement(side, elements)
   }
@@ -929,8 +945,8 @@
         )
       },
 
-      offset: function() {
-        return getHeight.bodyOffset() // Backwards compatability
+      offset: function () {
+        return getHeight.bodyOffset() // Backwards compatibility
       },
 
       bodyScroll: function getBodyScrollHeight() {
@@ -1034,9 +1050,9 @@
       }
 
       currentHeight =
-        undefined !== customHeight ? customHeight : getHeight[heightCalcMode]()
+        undefined === customHeight ? getHeight[heightCalcMode]() : customHeight
       currentWidth =
-        undefined !== customWidth ? customWidth : getWidth[widthCalcMode]()
+        undefined === customWidth ? getWidth[widthCalcMode]() : customWidth
 
       return (
         checkTolarance(height, currentHeight) ||
@@ -1090,7 +1106,9 @@
       return triggerLocked && triggerEvent in doubleEventList
     }
 
-    if (!isDoubleFiredEvent()) {
+    if (isDoubleFiredEvent()) {
+      log('Trigger event cancelled: ' + triggerEvent)
+    } else {
       recordTrigger()
       if (triggerEvent === 'init') {
         sizeIFrame(triggerEvent, triggerEventDesc, customHeight, customWidth)
@@ -1102,8 +1120,6 @@
           customWidth
         )
       }
-    } else {
-      log('Trigger event cancelled: ' + triggerEvent)
     }
   }
 
@@ -1113,7 +1129,7 @@
       log('Trigger event lock on')
     }
     clearTimeout(triggerLockedTimer)
-    triggerLockedTimer = setTimeout(function() {
+    triggerLockedTimer = setTimeout(function () {
       triggerLocked = false
       log('Trigger event lock off')
       log('--')
@@ -1155,7 +1171,7 @@
           size +
           ':' +
           triggerEvent +
-          (undefined !== msg ? ':' + msg : '')
+          (undefined === msg ? '' : ':' + msg)
 
       log('Sending message to host page (' + message + ')')
       target.postMessage(msgID + message, targetOrigin)
@@ -1175,17 +1191,17 @@
 
         init()
         firstRun = false
-        setTimeout(function() {
+        setTimeout(function () {
           initLock = false
         }, eventCancelTimer)
       },
 
       reset: function resetFromParent() {
-        if (!initLock) {
+        if (initLock) {
+          log('Page reset ignored by init')
+        } else {
           log('Page size reset by host page')
           triggerReset('resetPage')
-        } else {
-          log('Page reset ignored by init')
         }
       },
 
@@ -1198,7 +1214,7 @@
       },
       inPageLink: function inPageLinkF() {
         this.moveToAnchor()
-      }, // Backward compatability
+      }, // Backward compatibility
 
       pageInfo: function pageInfoFromParent() {
         var msgBody = getData()
@@ -1218,7 +1234,7 @@
     }
 
     function isMessageForUs() {
-      return msgID === ('' + event.data).substr(0, msgIdLen) // ''+ Protects against non-string messages
+      return msgID === ('' + event.data).slice(0, msgIdLen) // ''+ Protects against non-string messages
     }
 
     function getMessageType() {
@@ -1226,20 +1242,21 @@
     }
 
     function getData() {
-      return event.data.substr(event.data.indexOf(':') + 1)
+      return event.data.slice(event.data.indexOf(':') + 1)
     }
 
     function isMiddleTier() {
       return (
         (!(typeof module !== 'undefined' && module.exports) &&
           'iFrameResize' in window) ||
-        ('jQuery' in window && 'iFrameResize' in window.jQuery.prototype)
+        (window.jQuery !== undefined &&
+          'iFrameResize' in window.jQuery.prototype)
       )
     }
 
     function isInitMsg() {
       // Test if this message is from a child below us. This is an ugly test, however, updating
-      // the message format would break backwards compatibity.
+      // the message format would break backwards compatibility.
       return event.data.split(':')[2] in { true: 1, false: 1 }
     }
 
@@ -1280,9 +1297,15 @@
     }
   }
 
-  addEventListener(window, 'message', receiver)
-  addEventListener(window, 'readystatechange', chkLateLoaded)
-  chkLateLoaded()
+  // Setup if not already running
+  if (!('iframeResizer' in window)) {
+    window.iframeChildListener = function (data) {
+      receiver({ data, sameDomian: true })
+    }
+    addEventListener(window, 'message', receiver)
+    addEventListener(window, 'readystatechange', chkLateLoaded)
+    chkLateLoaded()
+  }
 
   
 })()
