@@ -95,7 +95,7 @@
     "dist"
   ],
   "dependencies": {
-    "iframe-resizer": "^4.2.10",
+    "iframe-resizer": "^4.3.11",
     "warning": "^4.0.3"
   }
 }
