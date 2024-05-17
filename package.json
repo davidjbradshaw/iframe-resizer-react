@@ -1,16 +1,28 @@
 {
   "name": "iframe-resizer-react",
-  "version": "1.0.9",
-  "description": "React interface for iframe-resizer",
-  "author": "davidjbradshaw",
-  "license": "MIT",
-  "repository": "davidjbradshaw/iframe-resizer-react",
+  "version": "1.0.11",
+  "description": "This package have been moved to @iframe-resizer/react",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidjbradshaw/iframe-resizer.git"
+  },
+  "github": "https://github.com/davidjbradshaw/iframe-resizer",
+  "homepage": "https://iframe-resizer.com",
+  "funding": {
+    "type": "individual",
+    "url": "https://iframe-resizer.com/licenses/"
+  },
+  "author": {
+    "name": "David J. Bradshaw",
+    "email": "dave@bradshaw.net"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
-    "node": ">=8",
+    "node": ">=16",
     "npm": ">=5"
   },
   "scripts": {
