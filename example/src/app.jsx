@@ -1,4 +1,4 @@
-import IframeResizer from "../../";
+import IframeResizer from "iframe-resizer-react";
 import React, { useRef, useState } from "react";
 
 import MessageData from "./message-data";

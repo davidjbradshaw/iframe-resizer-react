@@ -5,15 +5,14 @@
     "prettier",
     "prettier/babel",
     "prettier/react",
-    "prettier/unicorn",
-    "adjunct"
+    "prettier/unicorn"
   ],
   "env": {
     "browser": true,
     "es6": true
   },
   "plugins": [
-    "react",
+    // "react",
     "react-hooks",
     "prettier"
   ],

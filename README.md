@@ -12,7 +12,7 @@ Version 5 is now available via [@iframe-resizer/react](https://www.npmjs.com/pac
  * [@iframe-resizer/vue](https://www.npmjs.com/package/@iframe-resizer/vue)
  * [@iframe-resizer/jquery](https://www.npmjs.com/package/@iframe-resizer/jquery)
 
-**For more details please see our new website: [https://iframe-resizer.com](https://iframe-resizer.com).**
+**For more details please see: [https://iframe-resizer.com/upgrade](https://iframe-resizer.com/upgrade).**
 
 ---
 Copyright &copy; 2013-24 [David J. Bradshaw](https://github.com/davidjbradshaw)

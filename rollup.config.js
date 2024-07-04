@@ -10,46 +10,48 @@ import url from 'rollup-plugin-url'
 import pkg from './package.json'
 
 export default {
-  input: 'src/index.jsx',
+  input: "src/index.jsx",
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
-      sourcemap: true,
+      format: "cjs",
+      sourcemap: false,
     },
     {
       file: pkg.module,
-      format: 'es',
-      sourcemap: true,
+      format: "es",
+      sourcemap: false,
     },
   ],
   plugins: [
-    external(),
+    external({
+      includeDependencies: true,
+    }),
     postcss({
       modules: true,
     }),
     url(),
     svgr(),
     babel({
-      exclude: 'node_modules/**',
+      exclude: "node_modules/**",
     }),
     resolve(),
     commonjs(),
     copy({
       targets: [
         {
-          src: '../iframe-resizer/example/frame.*',
-          dest: 'example/public/html',
+          src: "../iframe-resizer/example/frame.*",
+          dest: "example/public/html",
         },
         {
-          src: 'node_modules/iframe-resizer/js/iframeResizer.*',
-          dest: 'example/public/js',
+          src: "node_modules/iframe-resizer/js/iframeResizer.*",
+          dest: "example/public/js",
         },
         {
-          src: 'src/index.d.ts',
-          dest: 'dist',
+          src: "src/index.d.ts",
+          dest: "dist",
         },
       ],
     }),
   ],
-}
+};
