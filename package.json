@@ -1,6 +1,6 @@
 {
   "name": "iframe-resizer-react",
-  "version": "5.0.2",
+  "version": "5.1.5",
   "description": "This package have been moved to @iframe-resizer/react",
   "license": "GPL-3.0-only",
   "repository": {
@@ -17,17 +17,17 @@
     "name": "David J. Bradshaw",
     "email": "dave@bradshaw.net"
   },
-  "main": "index.js",
-  "module": "index.es.js",
+  "main": "index.cjs.js",
+  "module": "index.esm.js",
   "types": "index.d.ts",
-  "jsnext:main": "index.es.js",
+  "jsnext:main": "index.esm.js",
   "engines": {
     "node": ">=16",
     "npm": ">=5"
   },
   "scripts": {},
   "dependencies": {
-    "@iframe-resizer/react": "5.0.2"
+    "@iframe-resizer/react": "5.1.5"
   },
   "peerDependencies": {
     "react": "^16.13.1 || >= 18.0.0",
