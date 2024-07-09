@@ -1,1 +1,0 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Visit [https://github.com/facebook/create-react-app](the Create React App website) for information about setting up a new React project.

@@ -1,8 +1,8 @@
 {
   "name": "iframe-resizer-react",
-  "version": "1.1.1",
+  "version": "5.0.2",
   "description": "This package have been moved to @iframe-resizer/react",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidjbradshaw/iframe-resizer.git"
@@ -11,104 +11,26 @@
   "homepage": "https://iframe-resizer.com",
   "funding": {
     "type": "individual",
-    "url": "https://iframe-resizer.com/licenses/"
+    "url": "https://iframe-resizer.com/pricing/"
   },
   "author": {
     "name": "David J. Bradshaw",
     "email": "dave@bradshaw.net"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "jsnext:main": "dist/index.es.js",
+  "main": "index.js",
+  "module": "index.es.js",
+  "types": "index.d.ts",
+  "jsnext:main": "index.es.js",
   "engines": {
     "node": ">=16",
     "npm": ">=5"
   },
-  "scripts": {
-    "eslint": "eslint --color src/*.jsx example/src/*.jsx rollup.config.js",
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-external-helpers": "^7.8.3",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/plugin-proposal-do-expressions": "^7.8.3",
-    "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
-    "@babel/plugin-proposal-function-bind": "^7.8.3",
-    "@babel/plugin-proposal-function-sent": "^7.8.3",
-    "@babel/plugin-proposal-json-strings": "^7.8.3",
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.8.3",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-    "@babel/plugin-proposal-numeric-separator": "^7.8.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
-    "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
-    "@babel/plugin-proposal-throw-expressions": "^7.8.3",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-syntax-import-meta": "^7.8.3",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "@svgr/rollup": "^5.3.1",
-    "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
-    "eslint-config-adjunct": "^4.0.2",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-array-func": "^3.1.5",
-    "eslint-plugin-eslint-comments": "^3.1.2",
-    "eslint-plugin-html": "^6.0.1",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-json": "^2.1.1",
-    "eslint-plugin-json-format": "^2.0.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-markdown": "^1.0.2",
-    "eslint-plugin-no-constructor-bind": "^1.2.8",
-    "eslint-plugin-no-use-extend-native": "^0.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-only-error": "^1.0.2",
-    "eslint-plugin-optimize-regex": "^1.1.7",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^3.0.0",
-    "eslint-plugin-simple-import-sort": "^5.0.2",
-    "eslint-plugin-sonarjs": "^0.5.0",
-    "eslint-plugin-switch-case": "^1.1.2",
-    "eslint-plugin-unicorn": "^18.0.1",
-    "gh-pages": "^2.2.0",
-    "prettier": "^2.0.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "^3.4.1",
-    "rollup": "^2.3.4",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.2",
-    "rollup-plugin-postcss": "^2.5.0",
-    "rollup-plugin-url": "^3.0.1"
+  "scripts": {},
+  "dependencies": {
+    "@iframe-resizer/react": "5.0.2"
   },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1 || ^18.0.0",
-    "react-dom": "^16.13.1 || ^18.0.0"
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "iframe-resizer": "^4.4.4",
-    "warning": "^4.0.3"
+    "react": "^16.13.1 || >= 18.0.0",
+    "react-dom": "^16.13.1 || >= 18.0.0"
   }
 }
