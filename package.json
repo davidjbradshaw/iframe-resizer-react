@@ -27,7 +27,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@iframe-resizer/react": "5.1.5"
+    "@iframe-resizer/react": "5.4.0"
   },
   "peerDependencies": {
     "react": "^16.13.1 || >= 18.0.0",
